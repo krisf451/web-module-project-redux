@@ -91,4 +91,7 @@ const mapStateToProps = (state) => {
     displayFavorites: state.favoriteState.displayFavorites,
   };
 };
-export default connect(mapStateToProps, { deleteMovie, addFavorites })(Movie);
+export default connect(mapStateToProps, {
+  deleteMovie,
+  addFavorites,
+})(Movie);
