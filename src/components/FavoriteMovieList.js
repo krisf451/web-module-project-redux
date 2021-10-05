@@ -4,33 +4,37 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 const FavoriteMovieList = (props) => {
-  const { favorites } = props;
+  const { favorites, displayFavorites } = props;
   // console.log(props.favorites);
-
-  return (
-    <div className="col-xs savedContainer">
-      <h5>Favorite Movies</h5>
-      {favorites.map((movie) => {
-        return (
-          <div key={movie.id}>
-            <Link
-              className="btn btn-light savedButton"
-              to={`/movies/${movie.id}`}
-            >
-              {movie.title}
-              <span>
-                <span className="material-icons">remove_circle</span>
-              </span>
-            </Link>
-          </div>
-        );
-      })}
-    </div>
-  );
+  if (displayFavorites) {
+    return (
+      <div className="col-xs savedContainer">
+        <h5>Favorite Movies</h5>
+        {favorites.map((movie) => {
+          return (
+            <div key={movie.id}>
+              <Link
+                className="btn btn-light savedButton"
+                to={`/movies/${movie.id}`}
+              >
+                {movie.title}
+                <span>
+                  <span className="material-icons">remove_circle</span>
+                </span>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 const mapStateToProps = (state) => {
   return {
     favorites: state.favoriteState.favorites,
+    displayFavorites: state.favoriteState.displayFavorites,
   };
 };
 export default connect(mapStateToProps)(FavoriteMovieList);

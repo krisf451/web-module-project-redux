@@ -22,6 +22,9 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAVORITES:
+      if (state.favorites.find((movie) => movie.id === action.payload.id)) {
+        return state;
+      }
       return {
         ...state,
         favorites: [...state.favorites, action.payload],
