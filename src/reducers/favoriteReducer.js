@@ -1,4 +1,8 @@
-import { ADD_FAVORITE } from "../actions/favoriteActions";
+import {
+  ADD_FAVORITES,
+  REMOVE_FAVORITE,
+  TOGGLE_FAVORITES,
+} from "../actions/favoriteActions";
 
 const initialState = {
   favorites: [
@@ -9,7 +13,7 @@ const initialState = {
       metascore: 100,
       genre: "Romantic Comedy",
       description:
-        "Aging genius deals with drug ridden woman from his childhood whilst trying to take care of his sick mother. A childhood protegy turned war hero will have your heart strings strumming wondering is life really a box of chocolates.",
+        "Aging genius deals with drug ridden woman from his childhood whilst trying to take care of his sick mother. A childhood protegy turned war hero will have your heart strings strumming and wondering if life really is like a box of chocolates.",
     },
   ],
   displayFavorites: true,
@@ -17,6 +21,23 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_FAVORITES:
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    case REMOVE_FAVORITE:
+      return {
+        ...state,
+        favorites: state.favorites.filter(
+          (favorite) => favorite.id !== action.payload
+        ),
+      };
+    case TOGGLE_FAVORITES:
+      return {
+        ...state,
+        displayFavorites: !state.displayFavorites,
+      };
     default:
       return state;
   }

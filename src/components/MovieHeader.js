@@ -1,11 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { toggleFavorites } from "../actions/favoriteActions";
 
 const MovieHeader = (props) => {
-  const { appTitle } = props;
-  const displayFavorites = true;
-
+  const { appTitle, displayFavorites, toggleFavorites } = props;
+  const handleToggle = () => {
+    toggleFavorites();
+    // console.log(displayFavorites);
+  };
   return (
     <div className="table-title">
       <div className="row">
@@ -14,7 +17,9 @@ const MovieHeader = (props) => {
         </div>
         <div className="col-sm-6 headerBar">
           <div className="btn btn-sm btn-primary">
-            <span>{displayFavorites ? "Hide" : "Show"} Favorites</span>
+            <span onClick={handleToggle}>
+              {displayFavorites ? "Hide" : "Show"} Favorites
+            </span>
           </div>
           <Link to="/movies" className="btn btn-sm btn-primary">
             View All Movies
@@ -31,6 +36,7 @@ const MovieHeader = (props) => {
 const mapStateToProps = (state) => {
   return {
     appTitle: state.movieState.appTitle,
+    displayFavorites: state.favoriteState.displayFavorites,
   };
 };
-export default connect(mapStateToProps)(MovieHeader);
+export default connect(mapStateToProps, { toggleFavorites })(MovieHeader);

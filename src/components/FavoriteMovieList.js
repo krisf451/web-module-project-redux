@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 const FavoriteMovieList = (props) => {
-  const favorites = [];
-  console.log(props.favorites);
+  const { favorites } = props;
+  // console.log(props.favorites);
 
   return (
     <div className="col-xs savedContainer">
@@ -19,7 +19,7 @@ const FavoriteMovieList = (props) => {
             >
               {movie.title}
               <span>
-                <span class="material-icons">remove_circle</span>
+                <span className="material-icons">remove_circle</span>
               </span>
             </Link>
           </div>
