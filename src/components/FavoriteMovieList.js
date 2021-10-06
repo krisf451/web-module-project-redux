@@ -21,7 +21,7 @@ const FavoriteMovieList = (props) => {
                 {movie.title}
                 <span>
                   <span
-                    onClick={() => props.removeFavorite(movie.id)}
+                    onClick={() => props.removeFavorite(movie.id || Date.now())}
                     className="material-icons"
                   >
                     remove_circle
